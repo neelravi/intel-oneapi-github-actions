@@ -1,7 +1,9 @@
 name: Build using Intel OneAPI components
 description: Build codes using Intel OneAPI components on github actions
-icon: code
-color: orange
+author: 'Dr. Ravindra Shinde'
+branding:
+  icon: 'code'
+  color: 'orange'
 
 
 on:
