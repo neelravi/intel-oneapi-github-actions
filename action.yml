@@ -1,4 +1,6 @@
 name: Build using Intel OneAPI components
+description: Build codes using Intel OneAPI components on github actions
+
 
 on:
   push:
