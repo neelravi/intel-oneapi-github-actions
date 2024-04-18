@@ -28,6 +28,9 @@ jobs:
         with:
           path: /opt/intel
           key: ${{ runner.os }}-oneapi
+          restore-keys: |
+            ${{ runner.os }}-oneapi
+
       - name: install Intel oneapi components
         run: |
           sudo apt-get install -y intel-basekit
@@ -45,13 +48,13 @@ jobs:
       - name: Compile and run Fortran program
         run: |
           source /opt/intel/oneapi/setvars.sh
-          ifort -o hello_fortran hello.f90
+          ifx -o hello_fortran hello.f90
           ./hello_fortran
 
       - name: Compile and run MPI C++ program
         run: |
           source /opt/intel/oneapi/setvars.sh
-          mpiicx -o hello_mpi_cpp hello_mpi.cpp
+          mpiicpx -o hello_mpi_cpp hello_mpi.cpp
           mpirun -np 2 ./mpi_hello_cpp
 
       - name: Compile and run MPI Fortran program
