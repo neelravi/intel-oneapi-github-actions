@@ -55,10 +55,10 @@ jobs:
         run: |
           source /opt/intel/oneapi/setvars.sh
           mpiicpx -o hello_mpi_cpp hello_mpi.cpp
-          mpirun -np 2 ./mpi_hello_cpp
+          mpirun -np 2 ./hello_mpi_cpp
 
       - name: Compile and run MPI Fortran program
         run: |
           source /opt/intel/oneapi/setvars.sh
           mpiifx -o hello_mpi_fortran hello_mpi.f90
-          mpirun -np 2 ./mpi_hello_fortran
+          mpirun -np 2 ./hello_mpi_fortran
