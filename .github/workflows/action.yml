@@ -33,6 +33,9 @@ jobs:
           sudo apt-get install -y intel-basekit
           sudo apt-get install -y intel-hpckit
 
+      - name: Checkout sample code
+        uses: actions/checkout@v3
+
       - name: Compile and run C++ program
         run: |
           source /opt/intel/oneapi/setvars.sh
