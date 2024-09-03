@@ -15,18 +15,10 @@ jobs:
       run:
         shell: bash --noprofile --norc {0}
     steps:
-      # - name: Download Intel oneAPI
-      #   run: |
-      #     sudo apt update
-      #     sudo apt install -y gpg-agent wget
-      #     wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
-      #     echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
-      #     sudo apt update
-
       - name: Use Intel oneAPI GitHub Actions fast setup
         uses: neelravi/intel-oneapi-github-actions@v1.2.0
         with:
-          components: basekit, hpckit, fortran, cpp, mpi
+          components: fortran, cpp, mpi, mkl
 
       - name: Cache Intel oneAPI components
         uses: actions/cache@v4.0.2
@@ -35,11 +27,6 @@ jobs:
           key: ${{ runner.os }}-oneapi
           restore-keys: |
             ${{ runner.os }}-oneapi
-
-      # - name: install Intel oneapi components
-      #   run: |
-      #     sudo apt-get install -y intel-basekit
-      #     sudo apt-get install -y intel-hpckit
 
       - name: Checkout sample code
         uses: actions/checkout@v4.1.7

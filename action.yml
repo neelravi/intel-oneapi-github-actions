@@ -8,12 +8,29 @@ branding:
 inputs:
   basekit:
     description: 'Install Intel OneAPI Base Toolkit'
-    required: true
-    default: 'true'
+    required: false
+    default: 'false'
   hpckit:
     description: 'Install Intel OneAPI HPC Toolkit and Intel MKL'
-    required: true
-    default: 'true'
+    required: false
+    default: 'false'
+  fortran:
+    description: 'Install Intel OneAPI Fortran Compiler'
+    required: false
+    default: 'false'
+  cpp:
+    description: 'Install Intel OneAPI C++ Compiler'
+    required: false
+    default: 'false'
+  mpi:
+    description: 'Install Intel OneAPI MPI'
+    required: false
+    default: 'false'
+  mkl:
+    description: 'Install Intel MKL'
+    required: false
+    default: 'false'
+
 
 runs:
   using: 'composite'
