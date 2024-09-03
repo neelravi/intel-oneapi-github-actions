@@ -18,7 +18,10 @@ jobs:
       - name: Use Intel oneAPI GitHub Actions fast setup
         uses: neelravi/intel-oneapi-github-actions@v1.3.0
         with:
-          components: fortran, cpp, mpi, mkl
+          fortran: 'true'
+          cpp: 'true'
+          mpi: 'true'
+          mkl: 'true'
 
       - name: Cache Intel oneAPI components
         uses: actions/cache@v4.0.2

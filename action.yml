@@ -17,19 +17,19 @@ inputs:
   fortran:
     description: 'Install Intel OneAPI Fortran Compiler'
     required: false
-    default: 'false'
+    default: 'true'
   cpp:
     description: 'Install Intel OneAPI C++ Compiler'
     required: false
-    default: 'false'
+    default: 'true'
   mpi:
     description: 'Install Intel OneAPI MPI'
     required: false
-    default: 'false'
+    default: 'true'
   mkl:
     description: 'Install Intel MKL'
     required: false
-    default: 'false'
+    default: 'true'
 
 
 runs:
