@@ -81,7 +81,6 @@ runs:
       shell: bash
       run: |
         sudo apt-get install -y intel-oneapi-compiler-dpcpp-cpp
-        sudo apt-get install -y intel-oneapi-compiler-cpp
         source /opt/intel/oneapi/setvars.sh
 
     - name: Install Intel oneAPI MPI
