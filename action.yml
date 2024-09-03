@@ -1,5 +1,5 @@
 name: intel-oneapi
-description: Build codes using Intel OneAPI components on github actions
+description: Build codes using Intel OneAPI components on Github actions
 author: 'Dr. Ravindra Shinde'
 branding:
   icon: 'code'
@@ -30,7 +30,7 @@ runs:
         sudo apt update
 
     - name: Cache Intel oneAPI components
-      uses: actions/cache@v2
+      uses: actions/cache@latest
       with:
         path: /opt/intel
         key: ${{ runner.os }}-oneapi
