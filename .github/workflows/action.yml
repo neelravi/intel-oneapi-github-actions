@@ -24,7 +24,7 @@ jobs:
           sudo apt update
 
       - name: Cache Intel oneAPI components
-        uses: actions/cache@latest
+        uses: actions/cache@v4.0.2
         with:
           path: /opt/intel
           key: ${{ runner.os }}-oneapi
@@ -37,7 +37,7 @@ jobs:
           sudo apt-get install -y intel-hpckit
 
       - name: Checkout sample code
-        uses: actions/checkout@latest
+        uses: actions/checkout@v4.1.7
 
       - name: Compile and run C++ program
         run: |
