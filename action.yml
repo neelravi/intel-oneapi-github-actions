@@ -51,3 +51,32 @@ runs:
         sudo apt-get install -y intel-mkl
         sudo apt-get install -y intel-hpckit
         source /opt/intel/oneapi/setvars.sh
+
+    - name: Instal Intel oneAPI Fortran Compiler
+      if: inputs.fortran == 'true'
+      shell: bash
+      run: |
+        sudo apt-get install -y intel-oneapi-compiler-fortran
+        source /opt/intel/oneapi/setvars.sh
+
+    - name: Install Intel oneAPI C++ Compiler
+      if: inputs.cpp == 'true'
+      shell: bash
+      run: |
+        sudo apt-get install -y intel-oneapi-compiler-dpcpp-cpp
+        sudo apt-get install -y intel-oneapi-compiler-cpp
+        source /opt/intel/oneapi/setvars.sh
+
+    - name: Install Intel oneAPI MPI
+      if: inputs.mpi == 'true'
+      shell: bash
+      run: |
+        sudo apt-get install -y intel-oneapi-mpi
+        source /opt/intel/oneapi/setvars.sh
+
+    - name: Install Intel MKL Library
+      if: inputs.mkl == 'true'
+      shell: bash
+      run: |
+        sudo apt-get install -y intel-oneapi-mkl
+        source /opt/intel/oneapi/setvars.sh
