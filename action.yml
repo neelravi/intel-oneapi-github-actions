@@ -1,4 +1,4 @@
-name: Build using Intel OneAPI components
+name: intel-oneapi
 description: Build codes using Intel OneAPI components on github actions
 author: 'Dr. Ravindra Shinde'
 branding:

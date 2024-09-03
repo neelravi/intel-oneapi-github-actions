@@ -1,4 +1,4 @@
-name: Build using Intel OneAPI components
+name: intel-oneapi
 
 on:
   pull_request:
