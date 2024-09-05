@@ -6,31 +6,10 @@ branding:
   color: 'orange'
 
 inputs:
-  basekit:
-    description: 'Install Intel OneAPI Base Toolkit'
-    required: false
-    default: 'false'
-  hpckit:
-    description: 'Install Intel OneAPI HPC Toolkit and Intel MKL'
-    required: false
-    default: 'false'
-  fortran:
-    description: 'Install Intel OneAPI Fortran Compiler'
-    required: false
-    default: 'true'
-  cpp:
-    description: 'Install Intel OneAPI C++ Compiler'
-    required: false
-    default: 'true'
-  mpi:
-    description: 'Install Intel OneAPI MPI'
-    required: false
-    default: 'true'
-  mkl:
-    description: 'Install Intel MKL'
-    required: false
-    default: 'true'
-
+  components:
+    description: 'Comma-separated list of Intel OneAPI components to install (e.g., fortran, cpp, mpi, mkl, basekit, hpckit)'
+    required: true
+    default: 'fortran,cpp,mpi,mkl'
 
 runs:
   using: 'composite'
@@ -54,45 +33,45 @@ runs:
         restore-keys: |
           ${{ runner.os }}-oneapi
 
-    - name: Install Intel oneAPI Base Toolkit
-      if: inputs.basekit == 'true'
+    - name: Install Intel oneAPI components
       shell: bash
       run: |
-        sudo apt-get install -y intel-basekit
-        source /opt/intel/oneapi/setvars.sh
+        # Convert comma-separated components into an array
+        components_list="${{ inputs.components }}"
+        IFS=',' read -ra COMPONENTS <<< "$components_list"
 
-    - name: Install Intel oneAPI HPC Toolkit
-      if: inputs.hpckit == 'true'
-      shell: bash
-      run: |
-        sudo apt-get install -y intel-mkl
-        sudo apt-get install -y intel-hpckit
-        source /opt/intel/oneapi/setvars.sh
+        # Iterate over each component and install accordingly
+        for component in "${COMPONENTS[@]}"; do
+          case "$component" in
+            basekit)
+              echo "Installing Intel OneAPI Base Toolkit"
+              sudo apt-get install -y intel-basekit
+              ;;
+            hpckit)
+              echo "Installing Intel OneAPI HPC Toolkit"
+              sudo apt-get install -y intel-hpckit
+              ;;
+            fortran)
+              echo "Installing Intel OneAPI Fortran Compiler"
+              sudo apt-get install -y intel-oneapi-compiler-fortran
+              ;;
+            cpp)
+              echo "Installing Intel OneAPI C++ Compiler"
+              sudo apt-get install -y intel-oneapi-compiler-dpcpp-cpp
+              ;;
+            mpi)
+              echo "Installing Intel OneAPI MPI"
+              sudo apt-get install -y intel-oneapi-mpi
+              ;;
+            mkl)
+              echo "Installing Intel MKL"
+              sudo apt-get install -y intel-oneapi-mkl
+              ;;
+            *)
+              echo "Unknown component: $component"
+              ;;
+          esac
+        done
 
-    - name: Instal Intel oneAPI Fortran Compiler
-      if: inputs.fortran == 'true'
-      shell: bash
-      run: |
-        sudo apt-get install -y intel-oneapi-compiler-fortran
-        source /opt/intel/oneapi/setvars.sh
-
-    - name: Install Intel oneAPI C++ Compiler
-      if: inputs.cpp == 'true'
-      shell: bash
-      run: |
-        sudo apt-get install -y intel-oneapi-compiler-dpcpp-cpp
-        source /opt/intel/oneapi/setvars.sh
-
-    - name: Install Intel oneAPI MPI
-      if: inputs.mpi == 'true'
-      shell: bash
-      run: |
-        sudo apt-get install -y intel-oneapi-mpi
-        source /opt/intel/oneapi/setvars.sh
-
-    - name: Install Intel MKL Library
-      if: inputs.mkl == 'true'
-      shell: bash
-      run: |
-        sudo apt-get install -y intel-oneapi-mkl
+        # Source the oneAPI environment
         source /opt/intel/oneapi/setvars.sh

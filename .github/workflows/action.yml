@@ -16,7 +16,7 @@ jobs:
         shell: bash --noprofile --norc {0}
     steps:
       - name: Use Intel oneAPI GitHub Actions fast setup
-        uses: neelravi/intel-oneapi-github-actions@v1.3.0
+        uses: neelravi/intel-oneapi-github-actions@v1.3.2
         with:
           basekit: 'true'
           hpckit: 'true'
