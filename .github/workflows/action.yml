@@ -16,10 +16,9 @@ jobs:
         shell: bash --noprofile --norc {0}
     steps:
       - name: Use Intel oneAPI GitHub Actions fast setup
-        uses: neelravi/intel-oneapi-github-actions@v1.3.2
+        uses: neelravi/intel-oneapi-github-actions@v2.0.0
         with:
-          basekit: 'true'
-          hpckit: 'true'
+          components: fortran,cpp,mpi,mkl
 
       - name: Cache Intel oneAPI components
         uses: actions/cache@v4.0.2
