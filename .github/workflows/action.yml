@@ -10,15 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: intel/oneapi-hpckit:latest
+      image: intel/oneapi:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Install Intel BaseKit
-        run: |
-          apt-get update && apt-get install -y intel-oneapi-basekit
-          source /opt/intel/oneapi/setvars.sh
 
       - name: Compile and run C++ program
         run: |
