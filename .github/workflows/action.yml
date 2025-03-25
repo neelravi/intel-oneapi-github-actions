@@ -16,12 +16,12 @@ jobs:
         shell: bash --noprofile --norc {0}
     steps:
       - name: Use Intel oneAPI GitHub Actions fast setup
-        uses: neelravi/intel-oneapi-github-actions@v2.0.0
+        uses: neelravi/intel-oneapi-github-actions@latest
         with:
           components: fortran,cpp,mpi,mkl
 
       - name: Cache Intel oneAPI components
-        uses: actions/cache@v4.0.2
+        uses: actions/cache@v4
         with:
           path: /opt/intel
           key: ${{ runner.os }}-oneapi
