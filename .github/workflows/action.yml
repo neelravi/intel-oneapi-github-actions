@@ -20,13 +20,13 @@ jobs:
         with:
           components: fortran,cpp,mpi,mkl
 
-      - name: Cache Intel oneAPI components
-        uses: actions/cache@v4
-        with:
-          path: /opt/intel
-          key: ${{ runner.os }}-oneapi
-          restore-keys: |
-            ${{ runner.os }}-oneapi
+      # - name: Cache Intel oneAPI components
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: /opt/intel
+      #     key: ${{ runner.os }}-oneapi
+      #     restore-keys: |
+      #       ${{ runner.os }}-oneapi
 
       - name: Checkout sample code
         uses: actions/checkout@v4
@@ -43,14 +43,14 @@ jobs:
           ifx -o hello_fortran hello.f90
           ./hello_fortran
 
-      # - name: Compile and run MPI C++ program
-      #   run: |
-      #     source /opt/intel/oneapi/setvars.sh
-      #     mpiicpx -o hello_mpi_cpp hello_mpi.cpp
-      #     mpirun -np 2 ./hello_mpi_cpp
+      - name: Compile and run MPI C++ program
+        run: |
+          source /opt/intel/oneapi/setvars.sh
+          mpiicpx -o hello_mpi_cpp hello_mpi.cpp
+          mpirun -np 2 ./hello_mpi_cpp
 
-      # - name: Compile and run MPI Fortran program
-      #   run: |
-      #     source /opt/intel/oneapi/setvars.sh
-      #     mpiifx -o hello_mpi_fortran hello_mpi.f90
-      #     mpirun -np 2 ./hello_mpi_fortran
+      - name: Compile and run MPI Fortran program
+        run: |
+          source /opt/intel/oneapi/setvars.sh
+          mpiifx -o hello_mpi_fortran hello_mpi.f90
+          mpirun -np 2 ./hello_mpi_fortran
