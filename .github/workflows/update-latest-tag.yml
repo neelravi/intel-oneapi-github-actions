@@ -1,0 +1,23 @@
+name: Update Latest Tag
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-latest-tag:
+    name: Update "latest" tag to the latest commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Ensures we have full git history
+
+      - name: Set "latest" tag to the newest commit
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -f latest
+          git push origin latest --force
