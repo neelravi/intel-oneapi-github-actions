@@ -7,29 +7,18 @@ on:
     branches:
       - main
 jobs:
-  build_code:
-    name: Build code with Intel OneAPI
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
-    defaults:
-      run:
-        shell: bash --noprofile --norc {0}
+    container:
+      image: intel/oneapi-hpckit:latest
     steps:
-      - name: Use Intel oneAPI GitHub Actions fast setup
-        uses: neelravi/intel-oneapi-github-actions@latest
-        with:
-          components: fortran,cpp,mpi,mkl
-
-      # - name: Cache Intel oneAPI components
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: /opt/intel
-      #     key: ${{ runner.os }}-oneapi
-      #     restore-keys: |
-      #       ${{ runner.os }}-oneapi
-
-      - name: Checkout sample code
+      - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install Intel BaseKit
+        run: |
+          apt-get update && apt-get install -y intel-oneapi-basekit
+          source /opt/intel/oneapi/setvars.sh
 
       - name: Compile and run C++ program
         run: |
