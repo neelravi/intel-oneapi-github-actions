@@ -17,24 +17,24 @@ jobs:
 
       - name: Compile and run C++ program
         run: |
-          . /opt/intel/oneapi/setvars.sh
+          # . /opt/intel/oneapi/setvars.sh
           icpx -o hello_cpp hello.cpp
           ./hello_cpp
 
       - name: Compile and run Fortran program
         run: |
-          . /opt/intel/oneapi/setvars.sh
+          # . /opt/intel/oneapi/setvars.sh
           ifx -o hello_fortran hello.f90
           ./hello_fortran
 
       - name: Compile and run MPI C++ program
         run: |
-          . /opt/intel/oneapi/setvars.sh
+          # . /opt/intel/oneapi/setvars.sh
           mpiicpx -o hello_mpi_cpp hello_mpi.cpp
           mpirun -np 2 ./hello_mpi_cpp
 
       - name: Compile and run MPI Fortran program
         run: |
-          . /opt/intel/oneapi/setvars.sh
+          # . /opt/intel/oneapi/setvars.sh
           mpiifx -o hello_mpi_fortran hello_mpi.f90
           mpirun -np 2 ./hello_mpi_fortran
