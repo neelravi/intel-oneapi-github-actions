@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: intel/oneapi:latest
+      image: intel/hpckit:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
